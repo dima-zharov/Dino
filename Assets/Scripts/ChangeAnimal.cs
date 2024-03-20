@@ -11,11 +11,16 @@ public class ChangeAnimal : MonoBehaviour
 
     public void UpdateSprites(float hiscore)
     {
+        if (hiscore < firstUnlock)
+            gameManager.prizeText.text = Mathf.FloorToInt(firstUnlock).ToString("D5");
         if (hiscore >= firstUnlock)
-            UpdateChanges(1, firstUnlock);
-        else if (hiscore >= secondUnlock)
-            UpdateChanges(2, secondUnlock);
-            
+            UpdateChanges(1);
+        if (hiscore >= secondUnlock)
+        {
+            UpdateChanges(2);
+            gameManager.prizeText.text = "All animals unlocked!";
+        }
+
     }
 
     private void ChangeAnimalFunc(int numberAnimal)
@@ -31,9 +36,12 @@ public class ChangeAnimal : MonoBehaviour
         }
     }
 
-    private void UpdateChanges(int numberAnimal, int needScore)
+    private void UpdateChanges(int numberAnimal)
     {
         ChangeAnimalFunc(numberAnimal);
-        gameManager.prizeText.text = Mathf.FloorToInt(needScore).ToString("D5");
+        gameManager.prizeText.text = Mathf.FloorToInt(secondUnlock).ToString("D5");
+
+
+
     }
 }

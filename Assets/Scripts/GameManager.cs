@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         spawner = FindObjectOfType<Spawner>();
         _changeAnimal = GetComponent<ChangeAnimal>();
         NewGame();
-        prizeText.text = 0.ToString("D5");
+
     }
 
     public void NewGame()
