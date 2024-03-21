@@ -1,11 +1,12 @@
-using System.Collections.Generic;
+
 using UnityEngine;
 
 
 public class ChangeAnimal : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private List<GameObject> Animals;
+    [SerializeField] private GameObject[] Animals = new GameObject[3];
+    [SerializeField] private GameObject[] AnimalsUI = new GameObject[3];
     private int firstUnlock = 150;
     private int secondUnlock = 350;
 
@@ -14,34 +15,28 @@ public class ChangeAnimal : MonoBehaviour
         if (hiscore < firstUnlock)
             gameManager.prizeText.text = Mathf.FloorToInt(firstUnlock).ToString("D5");
         if (hiscore >= firstUnlock)
-            UpdateChanges(1);
+        {
+            AnimalsUI[1].SetActive(true);
+            gameManager.prizeText.text = Mathf.FloorToInt(secondUnlock).ToString("D5");
+        }
         if (hiscore >= secondUnlock)
         {
-            UpdateChanges(2);
+            AnimalsUI[2].SetActive(true);
             gameManager.prizeText.text = "All animals unlocked!";
         }
 
     }
 
-    private void ChangeAnimalFunc(int numberAnimal)
-    {
-        Animals[numberAnimal].gameObject.SetActive(true);
 
-        for(int i = 0; i < Animals.Count; i++)
+
+    public void ChangeAnimalFunc(int needNumber)
+    {
+        Animals[needNumber].SetActive(true);
+
+        for (int i = 0; i < Animals.Length; i++)
         {
-            if (numberAnimal != i)
-            {
-                Animals[i].gameObject.SetActive(false);
-            }
+            if (needNumber != i)
+                Animals[i].SetActive(false);
         }
-    }
-
-    private void UpdateChanges(int numberAnimal)
-    {
-        ChangeAnimalFunc(numberAnimal);
-        gameManager.prizeText.text = Mathf.FloorToInt(secondUnlock).ToString("D5");
-
-
-
     }
 }
