@@ -42,11 +42,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.GetInt("choosenAnimal");
         player = FindObjectOfType<Player>();
         spawner = FindObjectOfType<Spawner>();
         _changeAnimal = GetComponent<ChangeAnimal>();
         NewGame();
-
     }
 
     public void NewGame()
